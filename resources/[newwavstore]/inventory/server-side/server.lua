@@ -1074,8 +1074,8 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 								if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 									Healths[user_id] = os.time() + 30
-									vRP.upgradeStress(user_id,2)
-									vRPC.updateHealth(source,8)
+									vRP.upgradeStress(user_id,3)
+									vRPC.updateHealth(source,12)
 								end
 							end
 
@@ -1134,9 +1134,9 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							vRP.weedTimer(user_id,1)
-							vRP.downgradeHunger(user_id,5)
-							vRP.downgradeThirst(user_id,5)
-							vRP.downgradeStress(user_id,20)
+							vRP.downgradeHunger(user_id,7)
+							vRP.downgradeThirst(user_id,7)
+							vRP.downgradeStress(user_id,30)
 							vPLAYER.movementClip(source,"move_m@shadyped@a")
 						end
 					end
@@ -1160,7 +1160,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							vRP.chemicalTimer(user_id,10)
-							vRP.downgradeStress(user_id,25)
+							vRP.downgradeStress(user_id,32)
 							TriggerClientEvent("cleanEffectDrugs",source)
 						end
 					end
@@ -1185,7 +1185,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							vRP.chemicalTimer(user_id,10)
 							TriggerClientEvent("setEcstasy",source)
-							TriggerClientEvent("setEnergetic",source,10,1.30)
+							TriggerClientEvent("setEnergetic",source,15,1.30)
 						end
 					end
 
@@ -1209,7 +1209,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 						if vRP.tryGetInventoryItem(user_id,totalName,1,true,Slot) then
 							vRP.chemicalTimer(user_id,10)
 							TriggerClientEvent("setCocaine",source)
-							TriggerClientEvent("setEnergetic",source,15,1.20)
+							TriggerClientEvent("setEnergetic",source,22.5,1.20)
 						end
 					end
 
@@ -1242,7 +1242,7 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 							TriggerClientEvent("setMeth",source)
 							Armors[user_id] = os.time() + 60
 							vRP.chemicalTimer(user_id,10)
-							vRP.setArmour(source,10)
+							vRP.setArmour(source,15)
 						end
 					end
 
@@ -2949,8 +2949,11 @@ AddEventHandler("inventory:useItem",function(Slot,Amount)
 
 			if nameItem == "handcuff" then
 				if not vRPC.inVehicle(source) then
+					
 					local otherPlayer = vRPC.nearestPlayer(source,0.8)
-					if otherPlayer then
+					local otherPlayerHealth = GetEntityHealth(GetPlayerPed(otherPlayer))
+
+					if otherPlayer and otherPlayerHealth > 101  then
 						if vPLAYER.getHandcuff(otherPlayer) then
 							vPLAYER.toggleHandcuff(otherPlayer)
 							TriggerClientEvent("sounds:source",source,"uncuff",0.5)

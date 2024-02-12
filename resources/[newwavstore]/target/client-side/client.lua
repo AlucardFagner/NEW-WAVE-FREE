@@ -1188,14 +1188,24 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 local policeMenu = {
 	{
-		event = "police:runInspect",
-		label = "Revistar",
-		tunnel = "police"
-	},{
 		event = "police:prisonClothes",
 		label = "Uniforme Presidiário",
 		tunnel = "police"
-	}
+	},{
+		event = "police:runInspect",
+		label = "Revistar",
+		tunnel = "police"
+	},
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYERMENU
+-----------------------------------------------------------------------------------------------------------------------------------------
+local playermenu = {
+	{
+		event = "police:runInspect",
+		label = "Revistar",
+		tunnel = "police"
+	},
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PARAMEDICMENU
@@ -1444,6 +1454,39 @@ function playerTargetEnable()
 								SendNUIMessage({ response = "validTarget", data = policeMenu })
 							elseif LocalPlayer["state"]["Paramedic"] then
 								SendNUIMessage({ response = "validTarget", data = paramedicMenu })
+							end
+
+							sucessTarget = true
+							while sucessTarget and targetActive do
+								local ped = PlayerPedId()
+								local coords = GetEntityCoords(ped)
+								local _,entCoords,entity = RayCastGamePlayCamera(10.0)
+
+								DisablePlayerFiring(ped,true)
+
+								if (IsControlJustReleased(1,24) or IsDisabledControlJustReleased(1,24)) then
+									SetCursorLocation(0.5,0.5)
+									SetNuiFocus(true,true)
+								end
+
+								if GetEntityType(entity) == 0 or #(coords - entCoords) > 1.0 then
+									sucessTarget = false
+								end
+
+								Citizen.Wait(1)
+							end
+
+							SendNUIMessage({ response = "leftTarget" })
+						end
+					elseif IsPedAPlayer(entity)  then
+						if #(coords - entCoords) <= 1.0 then
+							local index = NetworkGetPlayerIndexFromPed(entity)
+							local source = GetPlayerServerId(index)
+
+							innerEntity = { source }
+
+							if true then
+								SendNUIMessage({ response = "validTarget", data = playermenu })
 							end
 
 							sucessTarget = true

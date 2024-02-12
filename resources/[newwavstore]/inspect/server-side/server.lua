@@ -16,21 +16,46 @@ vCLIENT = Tunnel.getInterface("inspect")
 -----------------------------------------------------------------------------------------------------------------------------------------
 local openPlayer = {}
 local openSource = {}
------------------------------------------------------------------------------------------------------------------------------------------
--- POLICE:RUNINSPECT
------------------------------------------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- -- POLICE:RUNINSPECT
+-- -----------------------------------------------------------------------------------------------------------------------------------------
+-- RegisterServerEvent("police:runInspect")
+-- AddEventHandler("police:runInspect",function(entity)
+-- 	local source = source
+-- 	local user_id = vRP.getUserId(source)
+-- 	if user_id and vRP.getHealth(source) > 101 then
+-- 		TriggerClientEvent("player:playerCarry",entity[1],source,"handcuff")
+-- 		TriggerClientEvent("player:Commands",entity[1],true)
+-- 		TriggerClientEvent("inventory:Close",entity[1])
+-- 		openPlayer[user_id] = vRP.getUserId(entity[1])
+-- 		openSource[user_id] = entity[1]
+-- 		vCLIENT.openInspect(source)
+-- 	end
+-- end)
+
 RegisterServerEvent("police:runInspect")
-AddEventHandler("police:runInspect",function(entity)
-	local source = source
-	local user_id = vRP.getUserId(source)
-	if user_id and vRP.getHealth(source) > 101 then
-		TriggerClientEvent("player:playerCarry",entity[1],source,"handcuff")
-		TriggerClientEvent("player:Commands",entity[1],true)
-		TriggerClientEvent("inventory:Close",entity[1])
-		openPlayer[user_id] = vRP.getUserId(entity[1])
-		openSource[user_id] = entity[1]
-		vCLIENT.openInspect(source)
-	end
+AddEventHandler("police:runInspect", function(entity)
+    local source = source
+    local user_id = vRP.getUserId(source)
+
+    if user_id and vRP.getHealth(source) > 100 then
+        local targetSource = entity[1]
+        local targetUserId = vRP.getUserId(targetSource)   
+
+		if vPLAYER.getHandcuff(targetSource) then
+
+			openSource[user_id] = targetSource
+			openPlayer[user_id] = targetUserId
+		
+			TriggerClientEvent("player:playerCarry", targetSource, source, "handcuff")
+			TriggerClientEvent("player:Commands", targetSource, true)
+			TriggerClientEvent("inventory:Close", targetSource)
+			vCLIENT.openInspect(source)
+        else
+          
+			TriggerClientEvent("Notify",source,"vermelho","Precisa está algemado!",3000)
+        end
+    end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OPENCHEST
