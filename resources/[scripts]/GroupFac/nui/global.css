@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    
+    --BRANCO:#FFFFFF;
+    
+    --ACTIVE:#3471ffa2;
+
+    --FONTS-TOP:#0a6be7;
+
+    --BACKGROUND:#e4e3e4ba;
+
+    --BACKGROUND-MENU:rgb(46, 46, 46);
+
+    --MEMBER:#2e2e2e;
+
+    --SLOTS-TOTALS:#232323;
+
+    --H2:#414141;
+
+    --H1:#3F3D41;
+
+    --H1-2:#ffffff;
+
+    --HOVER:#0A1A27;
+
+    --ON:#ac0edf;
+
+    --OFF:#767577;
+
+    --CONTAINER-MONEY:#2e2e2e;
+
+    --VERDE-DEPOSITOU:#2e2e2e;
+
+    --VEMELHO-SACOU:#DD394A;
+
+    --BACKGROUND-DEPOSITOU:#2e2e2e;
+
+}

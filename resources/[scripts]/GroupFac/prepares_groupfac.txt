@@ -1,0 +1,15 @@
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Group Manager
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.prepare("groupSystem/setData","INSERT INTO gregos_members(user_id,name,cargo,status,organizacao) VALUES(@user_id ,@name,@cargo,@status , @organizacao)")
+vRP.prepare("groupSystem/checkData","SELECT * FROM gregos_members WHERE user_id = @user_id ")
+vRP.prepare("groupSystem/membersData","SELECT * FROM gregos_members WHERE organizacao = @organizacao")
+vRP.prepare("groupSystem/updateData","UPDATE gregos_members SET cargo = @cargo WHERE user_id = @user_id")
+vRP.prepare("groupSystem/deleteData","DELETE FROM gregos_members WHERE user_id = @user_id")
+vRP.prepare("groupSystem/updateStatus","UPDATE gregos_members SET status = @status WHERE user_id = @user_id")
+vRP.prepare("groupSystem/HowStatus","SELECT count(status) FROM gregos_members WHERE status = @status AND organizacao = @organizacao")
+vRP.prepare("groupSystem/membersQtd","SELECT count(user_id) FROM gregos_members WHERE organizacao = @organizacao")
+vRP.prepare("groupSystem/orgQtd","SELECT membros FROM gregos_organizacao WHERE organizacao = @organizacao")
+vRP.prepare("groupSystem/updateDataMembers","UPDATE gregos_organizacao SET membros = @membros WHERE organizacao = @organizacao")
+vRP.prepare("groupSystem/groupMensage","SELECT mensagem FROM gregos_organizacao WHERE organizacao = @organizacao")
+vRP.prepare("groupSystem/setMensage","UPDATE gregos_organizacao SET mensagem = @mensagem WHERE organizacao = @organizacao")
