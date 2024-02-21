@@ -29,7 +29,7 @@ function vRP.userIdentity(user_id)
 			vRP.userInfos[user_id]["name"] = identity[1]["name"]
 			vRP.userInfos[user_id]["name2"] = identity[1]["name2"]
 			vRP.userInfos[user_id]["discord"] = identity[1]["discord"]
-			vRP.userInfos[user_id]["permissions"] = identityProfissao[1]["permissions"]
+			-- vRP.userInfos[user_id]["permissions"] = identityProfissao[1]["permissions"]
 
 		end
 
