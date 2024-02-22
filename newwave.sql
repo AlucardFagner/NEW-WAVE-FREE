@@ -440,7 +440,7 @@ CREATE TABLE `summerz_characters`  (
   `bank` int NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id`(`id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for summerz_chests
